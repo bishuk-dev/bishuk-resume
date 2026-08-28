@@ -1,0 +1,71 @@
+---
+import { ArrowDown, ArrowUpRight, MapPin, Terminal, Cpu, GraduationCap } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { profile, skills, projects, now } from '../data/resume';
+---
+<BaseLayout>
+  <div id="top"></div>
+  <Navbar />
+  <main>
+    <section class="shell grid min-h-[calc(100vh-4rem)] items-center gap-10 py-20 lg:grid-cols-[1.15fr_.85fr]">
+      <div>
+        <div class="kicker flex items-center gap-3"><span class="pulse-dot h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_0_4px_rgba(125,223,242,.08)]"></span> Developer dossier // 2026</div>
+        <h1 class="mt-6 max-w-4xl text-[clamp(3.4rem,9vw,7.8rem)] font-[780] leading-[.83] tracking-[-.075em]">
+          Bishu<br/><span class="text-cyan-200">Kumar.</span>
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">{profile.summary}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#projects" class="inline-flex items-center gap-2 bg-cyan-200 px-5 py-3 text-sm font-bold text-[#061018] hover:bg-white">Inspect projects <ArrowDown size={17} /></a>
+          <a href={profile.links.email} class="inline-flex items-center gap-2 border border-white/14 px-5 py-3 text-sm font-bold text-white hover:border-cyan-300/50">Contact me <ArrowUpRight size={17} /></a>
+        </div>
+      </div>
+      <aside class="panel scan-corner p-6 md:p-8" aria-label="Profile summary">
+        <div class="flex items-center justify-between border-b border-white/8 pb-5"><span class="kicker">System profile</span><Terminal class="text-cyan-200" size={20}/></div>
+        <dl class="mt-6 space-y-6">
+          <div><dt class="mono text-xs uppercase tracking-[.14em] text-slate-500">Role</dt><dd class="mt-2 font-semibold">{profile.role}</dd></div>
+          <div><dt class="mono text-xs uppercase tracking-[.14em] text-slate-500">Focus</dt><dd class="mt-2 font-semibold">{profile.focus}</dd></div>
+          <div><dt class="mono text-xs uppercase tracking-[.14em] text-slate-500">Location</dt><dd class="mt-2 flex items-center gap-2 font-semibold"><MapPin size={16} class="text-cyan-200"/>{profile.location}</dd></div>
+          <div><dt class="mono text-xs uppercase tracking-[.14em] text-slate-500">Build mode</dt><dd class="mt-2 flex flex-wrap gap-2"><span class="tag">building</span><span class="tag">learning</span><span class="tag">shipping</span></dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="about" class="shell scroll-mt-24 py-24">
+      <SectionHeading index="01" eyebrow="About" title="Serious engineering, without the résumé buzzword fog." />
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="panel p-6"><Cpu size={22} class="text-cyan-200"/><h3 class="mt-5 text-lg font-bold">Systems mindset</h3><p class="muted mt-3 leading-7">I prefer explicit contracts, testable pipelines, and architecture that makes failure modes visible.</p></div>
+        <div class="panel p-6"><Terminal size={22} class="text-violet-300"/><h3 class="mt-5 text-lg font-bold">Backend first</h3><p class="muted mt-3 leading-7">APIs, data modeling, graph structures, storage, and observability are where I currently spend most of my project time.</p></div>
+        <div class="panel p-6"><GraduationCap size={22} class="text-amber-200"/><h3 class="mt-5 text-lg font-bold">Learning in public</h3><p class="muted mt-3 leading-7">I use projects to turn algorithms and AI concepts into working systems instead of collecting disconnected tutorials.</p></div>
+      </div>
+    </section>
+
+    <section id="skills" class="shell scroll-mt-24 py-24">
+      <SectionHeading index="02" eyebrow="Capabilities" title="A stack shaped around building end-to-end systems." description="Grouped by where I can actually use the technology—not by how many logos fit on a page." />
+      <div class="grid gap-px overflow-hidden border border-white/8 bg-white/8 sm:grid-cols-2 lg:grid-cols-3">
+        {skills.map((skill) => <div class="bg-[#08151f] p-6"><div class="kicker">{skill.group}</div><div class="mt-5 flex flex-wrap gap-2">{skill.items.map((item) => <span class="tag">{item}</span>)}</div></div>)}
+      </div>
+    </section>
+
+    <section id="projects" class="shell scroll-mt-24 py-24">
+      <SectionHeading index="03" eyebrow="Selected work" title="Projects where the architecture is part of the product." description="These are the strongest public examples of how I think about data flow, correctness, algorithms, and developer experience." />
+      <div class="space-y-6">{projects.map((project) => <ProjectCard project={project} />)}</div>
+    </section>
+
+    <section id="education" class="shell scroll-mt-24 py-24">
+      <SectionHeading index="04" eyebrow="Education" title="Computer science foundation, AI/ML direction." />
+      <div class="panel grid gap-8 p-7 md:grid-cols-[1fr_auto] md:items-end md:p-9">
+        <div><div class="kicker">Academic record</div><h3 class="mt-4 text-2xl font-bold tracking-[-.03em]">{profile.education.degree}</h3><p class="muted mt-2">{profile.education.school}</p></div>
+        <div class="mono text-sm text-cyan-200">{profile.education.period}</div>
+      </div>
+      <div class="mt-6 grid gap-3 md:grid-cols-3">{now.map((item, i) => <div class="border border-white/8 bg-white/[.02] p-5"><div class="mono text-xs text-slate-600">0{i + 1}</div><p class="mt-3 text-sm leading-6 text-slate-300">{item}</p></div>)}</div>
+    </section>
+
+    <section class="shell py-24">
+      <div class="panel scan-corner p-8 text-center md:p-14"><div class="kicker">End of file // contact</div><h2 class="mx-auto mt-5 max-w-3xl text-4xl font-bold tracking-[-.045em] md:text-6xl">Want to build something that requires more than a pretty frontend?</h2><p class="muted mx-auto mt-5 max-w-xl leading-7">I’m interested in backend engineering, practical AI, data-heavy systems, and projects where technical depth matters.</p><div class="mt-8 flex flex-wrap justify-center gap-3"><a href={profile.links.email} class="bg-cyan-200 px-5 py-3 text-sm font-bold text-[#061018] hover:bg-white">bishuk.dev@gmail.com</a><a href={profile.links.github} target="_blank" rel="noreferrer" class="border border-white/14 px-5 py-3 text-sm font-bold hover:border-cyan-300/50">github.com/bishuk-dev</a></div></div>
+    </section>
+  </main>
+  <footer class="border-t border-white/8 py-8"><div class="shell flex flex-col gap-3 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"><span>© 2026 Bishu Kumar</span><span class="mono">Astro // static-first // no UI framework shipped</span></div></footer>
+</BaseLayout>
