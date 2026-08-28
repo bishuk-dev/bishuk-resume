@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/resume';
+
+interface Props { title?: string; description?: string; }
+const {
+  title = `${profile.name} — Backend & AI Systems`,
+  description = profile.summary,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
+const personJson = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  url: canonical.href,
+  sameAs: [profile.links.github, profile.links.linkedin],
+  email: 'bishuk.dev@gmail.com',
+  jobTitle: profile.role,
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#061018" />
+    <meta name="description" content={description} />
+    <link rel="icon" href={favicon} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(personJson)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
