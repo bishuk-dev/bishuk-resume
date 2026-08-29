@@ -35,7 +35,7 @@ const personJson = {
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
     <title>{title}</title>
-    <script type="application/ld+json" set:html={JSON.stringify(personJson)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personJson)}></script>
   </head>
   <body>
     <slot />
