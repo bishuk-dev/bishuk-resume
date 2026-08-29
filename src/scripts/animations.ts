@@ -63,29 +63,67 @@ function initMotion() {
   });
 
   const journeyNodes = gsap.utils.toArray<HTMLElement>('[data-map-node]');
+  const compactMap = window.innerWidth < 900;
+  const camera = compactMap
+    ? {
+        spawn: { scale: 1.42, x: 420, y: 205 },
+        training: { scale: 1.36, x: 175, y: 10 },
+        mockmate: { scale: 1.42, x: -55, y: 160 },
+        bitcoin: { scale: 1.34, x: -315, y: -70 },
+        current: { scale: 1.28, x: -475, y: -275 },
+        overview: { scale: 0.72, x: 0, y: 0 },
+      }
+    : {
+        spawn: { scale: 2.05, x: 760, y: 335 },
+        training: { scale: 1.95, x: 315, y: 0 },
+        mockmate: { scale: 2, x: -120, y: 270 },
+        bitcoin: { scale: 1.85, x: -545, y: -130 },
+        current: { scale: 1.75, x: -800, y: -455 },
+        overview: { scale: 0.88, x: 0, y: 0 },
+      };
+
+  gsap.set('.world-map', camera.spawn);
+  gsap.set('.map-path-progress', { strokeDashoffset: 2100 });
+  gsap.set(journeyNodes, { opacity: 0.12, scale: 0.72 });
+  if (journeyNodes[0]) gsap.set(journeyNodes[0], { opacity: 1, scale: 1 });
+  gsap.set('.map-camera-label', { opacity: 1, y: 0 });
+
+  const revealNode = { opacity: 1, scale: 1, duration: 0.24, ease: 'back.out(2)' };
   const mapTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: '#journey',
       start: 'top top',
-      end: '+=2400',
+      end: '+=3600',
       pin: '.journey-stage',
       scrub: 1,
       anticipatePin: 1,
     },
   });
 
+  // Begin already locked on the B.Tech spawn point, then travel the route in order.
   mapTimeline
-    .to('.world-map', { scale: 1.55, xPercent: -5, yPercent: -5, ease: 'none', duration: 1 })
-    .to('.map-path-progress', { strokeDashoffset: 0, ease: 'none', duration: 2 }, 0)
-    .to(journeyNodes, { opacity: 1, scale: 1, stagger: 0.38, duration: 0.24, ease: 'back.out(2)' }, 0.25)
-    .to('.map-camera-label', { opacity: 1, y: 0, duration: 0.2 }, 1.25)
-    .to('.world-map', { scale: 2.2, xPercent: -13, yPercent: -9, ease: 'none', duration: 1.3 }, 1.1)
-    .to('.map-camera-label', { opacity: 0, duration: 0.15 }, 2.15);
+    .to({}, { duration: 0.35 })
+    .to('.world-map', { ...camera.training, ease: 'power1.inOut', duration: 1 })
+    .to('.map-path-progress', { strokeDashoffset: 1575, ease: 'none', duration: 1 }, '<')
+    .to(journeyNodes[1], revealNode, '<0.56')
+    .to('.world-map', { ...camera.mockmate, ease: 'power1.inOut', duration: 1 })
+    .to('.map-path-progress', { strokeDashoffset: 1050, ease: 'none', duration: 1 }, '<')
+    .to(journeyNodes[2], revealNode, '<0.56')
+    .to('.world-map', { ...camera.bitcoin, ease: 'power1.inOut', duration: 1 })
+    .to('.map-path-progress', { strokeDashoffset: 525, ease: 'none', duration: 1 }, '<')
+    .to(journeyNodes[3], revealNode, '<0.56')
+    .to('.world-map', { ...camera.current, ease: 'power1.inOut', duration: 1 })
+    .to('.map-path-progress', { strokeDashoffset: 0, ease: 'none', duration: 1 }, '<')
+    .to(journeyNodes[4], revealNode, '<0.56')
+    .to({}, { duration: 0.4 })
+    .to('.world-map', { ...camera.overview, ease: 'power2.inOut', duration: 1.35 })
+    .to('.map-camera-label', { opacity: 0, y: 14, duration: 0.25 }, '<0.75');
 
   const media = gsap.matchMedia();
   media.add('(min-width: 900px)', () => {
     const track = document.querySelector<HTMLElement>('.project-track');
-    if (!track) return;
+    const stage = document.querySelector<HTMLElement>('.projects-stage');
+    if (!track || !stage) return;
 
     const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 120);
 
@@ -93,10 +131,10 @@ function initMotion() {
       x: () => -distance(),
       ease: 'none',
       scrollTrigger: {
-        trigger: '#projects',
+        trigger: stage,
         start: 'top top',
         end: () => `+=${distance() + window.innerHeight * 0.75}`,
-        pin: '.projects-stage',
+        pin: stage,
         scrub: 1,
         invalidateOnRefresh: true,
         anticipatePin: 1,

@@ -82,7 +82,7 @@ import { profile, skills, projects, now } from '../data/resume';
             index="01"
             eyebrow="World Map"
             title="My current dev journey, rendered like a quest line."
-            description="The map zooms as you scroll. Each checkpoint is a real stage in what I am learning or building—not a fake career timeline."
+            description="Start at the B.Tech spawn point, then follow each checkpoint in order as the route fills. The camera only pulls back after the current quest is reached."
           />
         </div>
 
@@ -116,7 +116,7 @@ import { profile, skills, projects, now } from '../data/resume';
               <span>Deeper backend + practical AI engineering</span>
             </div>
           </div>
-          <div class="map-camera-label">CAMERA_LOCK // QUEST_PATH</div>
+          <div class="map-camera-label">CAMERA_LOCK // FOLLOW_ROUTE</div>
         </div>
       </div>
     </section>
@@ -145,16 +145,16 @@ import { profile, skills, projects, now } from '../data/resume';
     </section>
 
     <section id="projects" class="projects-section">
-      <div class="projects-stage">
-        <div class="projects-heading">
-          <SectionHeading
-            index="03"
-            eyebrow="Main Quests"
-            title="Project cartridges. Scroll sideways through the hard stuff."
-            description="Desktop turns this section into a pinned horizontal journey. Mobile keeps it stacked and readable."
-          />
-        </div>
+      <div class="projects-heading pt-28">
+        <SectionHeading
+          index="03"
+          eyebrow="Main Quests"
+          title="Project cartridges. Scroll sideways through the hard stuff."
+          description="The heading stays in normal document flow; only the cartridge track becomes pinned on desktop, so the projects never disappear behind the section title."
+        />
+      </div>
 
+      <div class="projects-stage">
         <div class="project-track">
           {projects.map((project) => <ProjectCard project={project} />)}
 
