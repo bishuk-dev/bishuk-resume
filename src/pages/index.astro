@@ -1,5 +1,4 @@
 ---
-import { ArrowDown, ArrowUpRight, MapPin, Terminal, Cpu, GraduationCap } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import SectionHeading from '../components/SectionHeading.astro';
@@ -7,65 +6,221 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { profile, skills, projects, now } from '../data/resume';
 ---
 <BaseLayout>
-  <div id="top"></div>
   <Navbar />
+
   <main>
-    <section class="shell grid min-h-[calc(100vh-4rem)] items-center gap-10 py-20 lg:grid-cols-[1.15fr_.85fr]">
-      <div>
-        <div class="kicker flex items-center gap-3"><span class="pulse-dot h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_0_4px_rgba(125,223,242,.08)]"></span> Developer dossier // 2026</div>
-        <h1 class="mt-6 max-w-4xl text-[clamp(3.4rem,9vw,7.8rem)] font-[780] leading-[.83] tracking-[-.075em]">
-          Bishu<br/><span class="text-cyan-200">Kumar.</span>
-        </h1>
-        <p class="mt-7 max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">{profile.summary}</p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#projects" class="inline-flex items-center gap-2 bg-cyan-200 px-5 py-3 text-sm font-bold text-[#061018] hover:bg-white">Inspect projects <ArrowDown size={17} /></a>
-          <a href={profile.links.email} class="inline-flex items-center gap-2 border border-white/14 px-5 py-3 text-sm font-bold text-white hover:border-cyan-300/50">Contact me <ArrowUpRight size={17} /></a>
+    <section id="top" class="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="pixel-orb" aria-hidden="true"></div>
+
+      <div class="shell hero-layout">
+        <div>
+          <div class="boot-stack" aria-label="System status">
+            <span class="boot-line ok">[OK] PROFILE_LOADED</span>
+            <span class="boot-line">CLASS: CSE_AI_ML</span>
+            <span class="boot-line">MODE: BUILDING</span>
+          </div>
+
+          <h1 class="hero-title" aria-label="Bishu Kumar">
+            <span class="mask"><span class="word">Bishu</span></span>
+            <span class="mask"><span class="word alt">Kumar</span></span>
+          </h1>
+
+          <p class="hero-copy">
+            <strong>Backend systems, applied AI, data engineering.</strong><br />
+            I build projects where architecture, algorithms, and correctness are part of the product—not hidden behind a shiny landing page.
+          </p>
+
+          <div class="hero-actions">
+            <a class="pixel-button" href="#journey">START QUEST ↓</a>
+            <a class="pixel-button secondary" href={profile.links.github} target="_blank" rel="noreferrer">OPEN GITHUB ↗</a>
+          </div>
+        </div>
+
+        <aside class="player-card pixel-box" aria-label="Player profile">
+          <div class="card-top">
+            <span>PLAYER_01</span>
+            <span>LV. 02</span>
+          </div>
+
+          <div class="avatar-screen">
+            <svg viewBox="0 0 160 160" role="img" aria-label="Original pixel-style developer avatar" shape-rendering="crispEdges">
+              <rect width="160" height="160" fill="#10152d"/>
+              <rect x="32" y="20" width="96" height="18" fill="#18111f"/>
+              <rect x="22" y="38" width="116" height="18" fill="#2d2438"/>
+              <rect x="32" y="56" width="96" height="48" fill="#f0c7a7"/>
+              <rect x="22" y="65" width="18" height="30" fill="#f0c7a7"/>
+              <rect x="120" y="65" width="18" height="30" fill="#f0c7a7"/>
+              <rect x="46" y="68" width="22" height="12" fill="#111525"/>
+              <rect x="92" y="68" width="22" height="12" fill="#111525"/>
+              <rect x="68" y="72" width="24" height="6" fill="#61e8ff"/>
+              <rect x="60" y="90" width="40" height="8" fill="#9d5c63"/>
+              <rect x="48" y="104" width="64" height="18" fill="#f0c7a7"/>
+              <rect x="34" y="120" width="92" height="32" fill="#8d6cff"/>
+              <rect x="18" y="132" width="24" height="20" fill="#8d6cff"/>
+              <rect x="118" y="132" width="24" height="20" fill="#8d6cff"/>
+              <rect x="66" y="120" width="28" height="32" fill="#16182d"/>
+              <rect x="72" y="128" width="16" height="8" fill="#b8f35f"/>
+            </svg>
+          </div>
+
+          <ul class="stat-list">
+            <li><b>Class</b><span>{profile.role}</span></li>
+            <li><b>Focus</b><span>{profile.focus}</span></li>
+            <li><b>Base</b><span>{profile.location}</span></li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="scroll-prompt">SCROLL TO EXPLORE ↓</div>
+    </section>
+
+    <section id="journey" class="journey">
+      <div class="journey-stage">
+        <div class="journey-overlay-copy">
+          <SectionHeading
+            index="01"
+            eyebrow="World Map"
+            title="My current dev journey, rendered like a quest line."
+            description="The map zooms as you scroll. Each checkpoint is a real stage in what I am learning or building—not a fake career timeline."
+          />
+        </div>
+
+        <div class="world-frame" aria-hidden="true">
+          <div class="world-map">
+            <div class="map-land land-a"></div>
+            <div class="map-land land-b"></div>
+            <svg class="map-path" viewBox="0 0 1200 780" preserveAspectRatio="none">
+              <polyline class="map-path-base" points="185,220 420,390 650,255 860,465 1085,625" />
+              <polyline class="map-path-progress" points="185,220 420,390 650,255 860,465 1085,625" />
+            </svg>
+
+            <div class="map-node node-1" data-map-node>
+              <b>SPAWN POINT</b>
+              <span>B.Tech CSE — AI & ML</span>
+            </div>
+            <div class="map-node node-2" data-map-node>
+              <b>TRAINING GROUNDS</b>
+              <span>DSA, backend fundamentals, systems thinking</span>
+            </div>
+            <div class="map-node node-3" data-map-node>
+              <b>MOCKMATE LAB</b>
+              <span>AST parsing, DAGs, AI-assisted data generation</span>
+            </div>
+            <div class="map-node node-4" data-map-node>
+              <b>BITCOIN INTEL ZONE</b>
+              <span>Parquet, DuckDB, Neo4j, deterministic feature pipelines</span>
+            </div>
+            <div class="map-node node-5" data-map-node>
+              <b>CURRENT QUEST</b>
+              <span>Deeper backend + practical AI engineering</span>
+            </div>
+          </div>
+          <div class="map-camera-label">CAMERA_LOCK // QUEST_PATH</div>
         </div>
       </div>
-      <aside class="panel scan-corner p-6 md:p-8" aria-label="Profile summary">
-        <div class="flex items-center justify-between border-b border-white/8 pb-5"><span class="kicker">System profile</span><Terminal class="text-cyan-200" size={20}/></div>
-        <dl class="mt-6 space-y-6">
-          <div><dt class="mono text-xs uppercase tracking-[.14em] text-slate-500">Role</dt><dd class="mt-2 font-semibold">{profile.role}</dd></div>
-          <div><dt class="mono text-xs uppercase tracking-[.14em] text-slate-500">Focus</dt><dd class="mt-2 font-semibold">{profile.focus}</dd></div>
-          <div><dt class="mono text-xs uppercase tracking-[.14em] text-slate-500">Location</dt><dd class="mt-2 flex items-center gap-2 font-semibold"><MapPin size={16} class="text-cyan-200"/>{profile.location}</dd></div>
-          <div><dt class="mono text-xs uppercase tracking-[.14em] text-slate-500">Build mode</dt><dd class="mt-2 flex flex-wrap gap-2"><span class="tag">building</span><span class="tag">learning</span><span class="tag">shipping</span></dd></div>
-        </dl>
-      </aside>
     </section>
 
-    <section id="about" class="shell scroll-mt-24 py-24">
-      <SectionHeading index="01" eyebrow="About" title="Serious engineering, without the résumé buzzword fog." />
-      <div class="grid gap-6 md:grid-cols-3">
-        <div class="panel p-6"><Cpu size={22} class="text-cyan-200"/><h3 class="mt-5 text-lg font-bold">Systems mindset</h3><p class="muted mt-3 leading-7">I prefer explicit contracts, testable pipelines, and architecture that makes failure modes visible.</p></div>
-        <div class="panel p-6"><Terminal size={22} class="text-violet-300"/><h3 class="mt-5 text-lg font-bold">Backend first</h3><p class="muted mt-3 leading-7">APIs, data modeling, graph structures, storage, and observability are where I currently spend most of my project time.</p></div>
-        <div class="panel p-6"><GraduationCap size={22} class="text-amber-200"/><h3 class="mt-5 text-lg font-bold">Learning in public</h3><p class="muted mt-3 leading-7">I use projects to turn algorithms and AI concepts into working systems instead of collecting disconnected tutorials.</p></div>
+    <section id="skills" class="inventory">
+      <div class="shell">
+        <SectionHeading
+          index="02"
+          eyebrow="Inventory"
+          title="Skills as equipment, not decorative badges."
+          description="No fake percentage bars. These are technologies and concepts I can actually place inside projects and explain."
+        />
+
+        <div class="inventory-grid">
+          {skills.map((skill, index) => (
+            <article class="inventory-card">
+              <div class="slot-number">SLOT_{String(index + 1).padStart(2, '0')}</div>
+              <h3>{skill.group}</h3>
+              <div class="inventory-items">
+                {skill.items.map((item) => <span>{item}</span>)}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
 
-    <section id="skills" class="shell scroll-mt-24 py-24">
-      <SectionHeading index="02" eyebrow="Capabilities" title="A stack shaped around building end-to-end systems." description="Grouped by where I can actually use the technology—not by how many logos fit on a page." />
-      <div class="grid gap-px overflow-hidden border border-white/8 bg-white/8 sm:grid-cols-2 lg:grid-cols-3">
-        {skills.map((skill) => <div class="bg-[#08151f] p-6"><div class="kicker">{skill.group}</div><div class="mt-5 flex flex-wrap gap-2">{skill.items.map((item) => <span class="tag">{item}</span>)}</div></div>)}
+    <section id="projects" class="projects-section">
+      <div class="projects-stage">
+        <div class="projects-heading">
+          <SectionHeading
+            index="03"
+            eyebrow="Main Quests"
+            title="Project cartridges. Scroll sideways through the hard stuff."
+            description="Desktop turns this section into a pinned horizontal journey. Mobile keeps it stacked and readable."
+          />
+        </div>
+
+        <div class="project-track">
+          {projects.map((project) => <ProjectCard project={project} />)}
+
+          <article class="project-cartridge">
+            <div class="cartridge-label sidequest-label">
+              <div>
+                <div class="project-index">SIDE_QUESTS // OPEN WORLD</div>
+                <h3>More builds live on GitHub.</h3>
+                <p class="project-description">
+                  Smaller experiments, frontend builds, DSA work, and projects that are useful as learning checkpoints even when they are not portfolio headliners.
+                </p>
+                <a class="project-link" href={profile.links.github} target="_blank" rel="noreferrer">EXPLORE ALL REPOS ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="projects" class="shell scroll-mt-24 py-24">
-      <SectionHeading index="03" eyebrow="Selected work" title="Projects where the architecture is part of the product." description="These are the strongest public examples of how I think about data flow, correctness, algorithms, and developer experience." />
-      <div class="space-y-6">{projects.map((project) => <ProjectCard project={project} />)}</div>
-    </section>
+    <section id="status" class="status-zone">
+      <div class="shell">
+        <SectionHeading
+          index="04"
+          eyebrow="Status Screen"
+          title="Still leveling up. That is the point."
+          description="The site should show ambition without pretending I already have ten years of industry experience."
+        />
 
-    <section id="education" class="shell scroll-mt-24 py-24">
-      <SectionHeading index="04" eyebrow="Education" title="Computer science foundation, AI/ML direction." />
-      <div class="panel grid gap-8 p-7 md:grid-cols-[1fr_auto] md:items-end md:p-9">
-        <div><div class="kicker">Academic record</div><h3 class="mt-4 text-2xl font-bold tracking-[-.03em]">{profile.education.degree}</h3><p class="muted mt-2">{profile.education.school}</p></div>
-        <div class="mono text-sm text-cyan-200">{profile.education.period}</div>
+        <div class="status-layout">
+          <div class="dialogue-box pixel-box" data-reveal>
+            <div class="speaker">BISHU // DIALOGUE</div>
+            <p>
+              I’m a computer science student using bigger projects to force myself to learn architecture, data modeling, algorithms, debugging, and AI engineering beyond tutorial-level demos.
+            </p>
+            <div class="education-card">
+              <b>{profile.education.degree}</b>
+              <span>{profile.education.school} · {profile.education.period}</span>
+            </div>
+          </div>
+
+          <div class="quest-list" data-reveal>
+            {now.map((item) => <div class="quest-item">{item}</div>)}
+          </div>
+        </div>
       </div>
-      <div class="mt-6 grid gap-3 md:grid-cols-3">{now.map((item, i) => <div class="border border-white/8 bg-white/[.02] p-5"><div class="mono text-xs text-slate-600">0{i + 1}</div><p class="mt-3 text-sm leading-6 text-slate-300">{item}</p></div>)}</div>
     </section>
 
-    <section class="shell py-24">
-      <div class="panel scan-corner p-8 text-center md:p-14"><div class="kicker">End of file // contact</div><h2 class="mx-auto mt-5 max-w-3xl text-4xl font-bold tracking-[-.045em] md:text-6xl">Want to build something that requires more than a pretty frontend?</h2><p class="muted mx-auto mt-5 max-w-xl leading-7">I’m interested in backend engineering, practical AI, data-heavy systems, and projects where technical depth matters.</p><div class="mt-8 flex flex-wrap justify-center gap-3"><a href={profile.links.email} class="bg-cyan-200 px-5 py-3 text-sm font-bold text-[#061018] hover:bg-white">bishuk.dev@gmail.com</a><a href={profile.links.github} target="_blank" rel="noreferrer" class="border border-white/14 px-5 py-3 text-sm font-bold hover:border-cyan-300/50">github.com/bishuk-dev</a></div></div>
+    <section class="contact-zone">
+      <div class="continue-box pixel-box" data-reveal>
+        <div class="section-kicker">05 // Continue?</div>
+        <h2>New quest?</h2>
+        <p>
+          If the work involves backend engineering, data-heavy systems, practical AI, or something technically weird enough to be interesting, I want to hear about it.
+        </p>
+        <div class="continue-actions">
+          <a class="pixel-button" href={profile.links.email}>SEND MESSAGE</a>
+          <a class="pixel-button secondary" href={profile.links.linkedin} target="_blank" rel="noreferrer">LINKEDIN ↗</a>
+        </div>
+      </div>
     </section>
   </main>
-  <footer class="border-t border-white/8 py-8"><div class="shell flex flex-col gap-3 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"><span>© 2026 Bishu Kumar</span><span class="mono">Astro // static-first // no UI framework shipped</span></div></footer>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <span>© 2026 BISHU KUMAR // SAVE FILE ACTIVE</span>
+      <span>ASTRO + GSAP + LENIS // ORIGINAL PIXEL UI</span>
+    </div>
+  </footer>
 </BaseLayout>
