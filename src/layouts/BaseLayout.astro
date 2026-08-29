@@ -23,12 +23,15 @@ const personJson = {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#061018" />
+    <meta name="theme-color" content="#0a0914" />
     <meta name="description" content={description} />
     <link rel="icon" href={favicon} />
     <link rel="canonical" href={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -38,6 +41,11 @@ const personJson = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(personJson)}></script>
   </head>
   <body>
+    <div class="crt-overlay" aria-hidden="true"></div>
+    <div class="pixel-cursor" aria-hidden="true"></div>
     <slot />
+    <script>
+      import '../scripts/animations';
+    </script>
   </body>
 </html>
