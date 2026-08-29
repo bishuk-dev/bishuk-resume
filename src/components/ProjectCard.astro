@@ -1,25 +1,28 @@
 ---
-import { ArrowUpRight } from '@lucide/astro';
 interface Project {
-  index: string; title: string; eyebrow: string; description: string; highlights: string[]; stack: string[]; href: string; status: string;
+  index: string;
+  title: string;
+  eyebrow: string;
+  description: string;
+  highlights: string[];
+  stack: string[];
+  href: string;
+  status: string;
 }
 const { project } = Astro.props as { project: Project };
 ---
-<article class="panel scan-corner grid gap-7 p-6 md:grid-cols-[1fr_1.35fr] md:p-8">
-  <div>
-    <div class="kicker">Case file // {project.index}</div>
-    <h3 class="mt-4 text-2xl font-bold tracking-[-.03em] md:text-3xl">{project.title}</h3>
-    <p class="mt-2 text-sm font-medium text-cyan-200/85">{project.eyebrow}</p>
-    <p class="muted mt-5 leading-7">{project.description}</p>
-    <a class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white underline decoration-cyan-300/50 underline-offset-4 hover:text-cyan-200" href={project.href} target="_blank" rel="noreferrer">
-      View repository <ArrowUpRight size={16} />
-    </a>
-  </div>
-  <div class="border-t border-white/8 pt-6 md:border-l md:border-t-0 md:pl-8 md:pt-0">
-    <div class="mono mb-4 text-xs uppercase tracking-[.14em] text-slate-500">{project.status}</div>
-    <ul class="space-y-3 text-sm leading-6 text-slate-300">
-      {project.highlights.map((item) => <li class="flex gap-3"><span class="mt-[.55rem] h-1.5 w-1.5 shrink-0 bg-cyan-300"></span><span>{item}</span></li>)}
+<article class="project-cartridge">
+  <div class="cartridge-label">
+    <div class="project-index">QUEST_{project.index} // {project.status}</div>
+    <h3>{project.title}</h3>
+    <p class="project-eyebrow">{project.eyebrow}</p>
+    <p class="project-description">{project.description}</p>
+    <ul class="project-highlights">
+      {project.highlights.map((item) => <li>{item}</li>)}
     </ul>
-    <div class="mt-6 flex flex-wrap gap-2">{project.stack.map((item) => <span class="tag">{item}</span>)}</div>
+    <div class="project-stack">
+      {project.stack.map((item) => <span>{item}</span>)}
+    </div>
+    <a class="project-link" href={project.href} target="_blank" rel="noreferrer">OPEN REPOSITORY ↗</a>
   </div>
 </article>
