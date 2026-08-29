@@ -2,10 +2,8 @@
 interface Props { index: string; eyebrow: string; title: string; description?: string; }
 const { index, eyebrow, title, description } = Astro.props;
 ---
-<div class="mb-9 grid gap-4 md:grid-cols-[150px_1fr] md:items-start">
-  <div class="kicker pt-2">[{index}] {eyebrow}</div>
-  <div>
-    <h2 class="section-title max-w-3xl">{title}</h2>
-    {description && <p class="muted mt-4 max-w-2xl text-base leading-7">{description}</p>}
-  </div>
+<div data-reveal>
+  <div class="section-kicker">{index} // {eyebrow}</div>
+  <h2 class="section-title">{title}</h2>
+  {description && <p class="section-copy">{description}</p>}
 </div>
